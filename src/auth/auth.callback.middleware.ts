@@ -1,5 +1,6 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction } from 'express';
+import passport = require('passport');
 
 @Injectable()
 export class AuthCallbackMiddleware implements NestMiddleware {
@@ -7,10 +8,6 @@ export class AuthCallbackMiddleware implements NestMiddleware {
   }
 
   use(req: any, res: any, next: NextFunction) {
-    const user = {
-      name: req.user.displayName,
-      photo: req.user.photo,
-    };
-    res.end();
+    passport.authenticate('oauth2', {'scope': 'profile'})(req, res, next);
   };
 }

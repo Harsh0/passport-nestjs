@@ -1,9 +1,12 @@
-import { Controller, UseGuards, Get, Request } from '@nestjs/common';
+import { Controller, Get, Req, Res, Session } from '@nestjs/common';
 import { AppService } from './app.service';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @Get()
+  async login(@Req() req, @Res() reply, @Session() session) {
+    req.res.send(JSON.stringify(req.user, null, 2));
+  }
 }

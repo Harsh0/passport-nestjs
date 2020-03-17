@@ -3,10 +3,10 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { AuthMiddleware } from './auth.middleware';
 import { AuthCallbackMiddleware } from './auth.callback.middleware';
-import { AirbusStrategy } from './auth.strategy';
+import { GoogleStrategy } from './auth.strategy';
 
 @Module({
-  providers: [AuthService, AirbusStrategy],
+  providers: [AuthService, GoogleStrategy],
   controllers: [AuthController]
 })
 export class AuthModule {

@@ -1,17 +1,20 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get , Res, Req, Session, Redirect}  from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
-    @Get('auth/login')
+    @Get('login')
     async login() {
 
     }
 
-    @Get('auth/callback')
-    public async authCallback() {
-        
+    @Redirect('/', 302)
+    @Get('callback')
+    public async authCallback(@Req() req, @Res() reply, @Session() session) {
+        if (session.redirect_target) {
+            return { url: session.redirect_target }
+        }
     }
 }

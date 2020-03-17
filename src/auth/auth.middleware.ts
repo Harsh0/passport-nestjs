@@ -8,6 +8,7 @@ export class AuthMiddleware implements NestMiddleware {
   }
 
   use(req: any, res: any, next: NextFunction) {
+    req.session.redirect_target = req.query.redirect_target || '/';
     passport.authenticate('oauth2', {scope: "email" })(req, res, next)
   }
 }
